@@ -1,60 +1,35 @@
 package com.revisao.ecommerce.entities;
 
-import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_item_pedido")
+@Table(name = "itens_pedido")
 public class ItemDoPedido {
 
-	@EmbeddedId
-	private ItemDoPedidoPK id = new ItemDoPedidoPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private Integer quantidade;
-	private Double preco;
+    @Column(nullable = false)
+    private Integer quantidade;
 
-	public ItemDoPedido() {
+    @Column(nullable = false)
+    private Double preco;
 
-	}
+    @ManyToOne
+    @JoinColumn(name = "pedido_id", nullable = false)
+    private Pedido pedido;
 
-	public ItemDoPedido(Pedido pedido, Produto produto, Integer quantidade, Double preco) {
-		id.setPedido(pedido);
-		id.setProduto(produto);
-		this.quantidade = quantidade;
-		this.preco = preco;
-	}
+    @ManyToOne
+    @JoinColumn(name = "produto_id", nullable = false)
+    private Produto produto;
 
-	public Pedido getPedido() {
-		return id.getPedido();
-	}
-
-	public void setPedido(Pedido pedido) {
-		id.setPedido(pedido);
-	}
-	
-	public Produto getProduto() {
-		return id.getProduto();
-	}
-
-	public void setProduto(Produto produto) {
-		id.setProduto(produto);
-	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
+    // Getters e Setters
 }

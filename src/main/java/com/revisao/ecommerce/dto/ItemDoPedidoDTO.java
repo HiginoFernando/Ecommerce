@@ -1,13 +1,14 @@
 package com.revisao.ecommerce.dto;
 
 import lombok.*;
-import java.time.Instant;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PagamentoDTO {
+public class ItemDoPedidoDTO {
     private Long id;
-    private Instant momento;
+    private Integer quantidade;
+    private Double preco;
+    private Long produtoId;
     private Long pedidoId;
 }

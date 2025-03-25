@@ -1,80 +1,41 @@
 package com.revisao.ecommerce.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "usuarios")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nome;
-	private String email;
-	private String telefone;
-	private String senha;
-	
-	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedidos = new ArrayList<>();
-	
-	public Usuario() {
-		
-	}
-	
-	public Usuario(Long id, String nome, String email, String telefone, String senha) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-		this.senha = senha;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private String nome;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	public String getNome() {
-		return nome;
-	}
+    private String telefone;
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    @Column(nullable = false)
+    private String senha;
 
-	public String getEmail() {
-		return email;
-	}
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"))
+    @Column(name = "role")
+    private List<String> roles;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
+    // Getters e Setters
 }

@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revisao.ecommerce.entities.Produto;
-import com.revisao.ecommerce.services.ProdutoService;
+import com.revisao.ecommerce.entities.Pagamento;
+import com.revisao.ecommerce.services.PagamentoService;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/pagamentos")
+public class PagamentoController {
 
     @Autowired
-    private ProdutoService produtoService;
+    private PagamentoService pagamentoService;
 
     @GetMapping
-    public List<Produto> findAll() {
-        return produtoService.findAll();
+    public List<Pagamento> findAll() {
+        return pagamentoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Produto> findById(@PathVariable Long id) {
-        return produtoService.findById(id);
+    public Optional<Pagamento> findById(@PathVariable Long id) {
+        return pagamentoService.findById(id);
     }
 
     @PostMapping
-    public Produto save(@RequestBody Produto produto) {
-        return produtoService.save(produto);
+    public Pagamento save(@RequestBody Pagamento pagamento) {
+        return pagamentoService.save(pagamento);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        produtoService.delete(id);
+        pagamentoService.delete(id);
     }
 }

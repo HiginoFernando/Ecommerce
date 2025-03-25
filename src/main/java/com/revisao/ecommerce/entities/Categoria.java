@@ -1,8 +1,8 @@
 package com.revisao.ecommerce.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,40 +11,18 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_categoria")
+@Table(name = "categorias")
 public class Categoria {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-	public String nome;
-	
-	@ManyToMany(mappedBy = "categorias")
-	private Set<Produto> produtos = new HashSet<>();
-	
-	public Categoria() {
-		
-	}
-	
-	public Categoria(Long id, String nome) {
-		this.id = id;
-		this.nome = nome;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false, unique = true)
+    private String nome;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos;
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
+    // Getters e Setters
 }

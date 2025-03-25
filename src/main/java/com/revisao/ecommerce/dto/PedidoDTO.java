@@ -1,9 +1,14 @@
 package com.revisao.ecommerce.dto;
 
+import lombok.*;
 import java.time.Instant;
 
-import com.revisao.ecommerce.entities.StatusDoPedido;
-
-public record PedidoDTO(Instant momento, StatusDoPedido status) {
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PedidoDTO {
+    private Long id;
+    private Instant momento;
+    private String status;
+    private Long usuarioId;
 }

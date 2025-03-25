@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revisao.ecommerce.entities.Produto;
-import com.revisao.ecommerce.services.ProdutoService;
+import com.revisao.ecommerce.entities.ItemDoPedido;
+import com.revisao.ecommerce.services.ItemDoPedidoService;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/itens-do-pedido")
+public class ItemDoPedidoController {
 
     @Autowired
-    private ProdutoService produtoService;
+    private ItemDoPedidoService itemDoPedidoService;
 
     @GetMapping
-    public List<Produto> findAll() {
-        return produtoService.findAll();
+    public List<ItemDoPedido> findAll() {
+        return itemDoPedidoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Produto> findById(@PathVariable Long id) {
-        return produtoService.findById(id);
+    public Optional<ItemDoPedido> findById(@PathVariable Long id) {
+        return itemDoPedidoService.findById(id);
     }
 
     @PostMapping
-    public Produto save(@RequestBody Produto produto) {
-        return produtoService.save(produto);
+    public ItemDoPedido save(@RequestBody ItemDoPedido itemDoPedido) {
+        return itemDoPedidoService.save(itemDoPedido);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        produtoService.delete(id);
+        itemDoPedidoService.delete(id);
     }
 }

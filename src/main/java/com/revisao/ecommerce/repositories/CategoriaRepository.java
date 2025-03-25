@@ -1,12 +1,7 @@
 package com.revisao.ecommerce.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.revisao.ecommerce.entities.Categoria;
 
-public class CategoriaRepository {
-
-	public Categoria getReferenceById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-}
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {}
