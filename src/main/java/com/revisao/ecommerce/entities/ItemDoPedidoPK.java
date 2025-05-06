@@ -8,18 +8,18 @@ import jakarta.persistence.ManyToOne;
 public class ItemDoPedidoPK {
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")  // Define a chave estrangeira para "Pedido"
+    @JoinColumn(name = "pedido_id")  
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id")  // Define a chave estrangeira para "Produto"
+    @JoinColumn(name = "produto_id") 
     private Produto produto;
 
-    // Construtor padrão
+    
     public ItemDoPedidoPK() {
     }
 
-    // Construtor com parâmetros
+
     public ItemDoPedidoPK(Pedido pedido, Produto produto) {
         this.pedido = pedido;
         this.produto = produto;
@@ -42,8 +42,7 @@ public class ItemDoPedidoPK {
         this.produto = produto;
     }
 
-    // Sobrescrita do equals() e hashCode() é importante para garantir o correto funcionamento
-    // das operações de comparação no banco de dados, especialmente com chaves compostas.
+  
     
     @Override
     public boolean equals(Object obj) {

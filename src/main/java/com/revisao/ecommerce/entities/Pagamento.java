@@ -1,18 +1,10 @@
 package com.revisao.ecommerce.entities;
 
 import java.time.Instant;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "pagamentos")
+@Table(name = "pagamento")
 public class Pagamento {
 
     @Id
@@ -22,9 +14,47 @@ public class Pagamento {
     @Column(nullable = false)
     private Instant momento;
 
+    @Column(nullable = false)
+    private String status;  
     @OneToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
+    @JoinColumn(name = "pedido_id") 
     private Pedido pedido;
 
-    // Getters e Setters
+    public Pagamento() { }
+
+    public Pagamento(Instant momento, String status, Pedido pedido) {
+        this.momento = momento;
+        this.status = status;
+        this.pedido = pedido;
+    }
+
+    // getters e setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public Instant getMomento() {
+        return momento;
+    }
+
+    public void setMomento(Instant momento) {
+        this.momento = momento;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
 }
