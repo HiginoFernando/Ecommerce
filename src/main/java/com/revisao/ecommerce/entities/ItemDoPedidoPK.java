@@ -1,59 +1,52 @@
+// src/main/java/com/revisao/ecommerce/entities/ItemDoPedidoPK.java
 package com.revisao.ecommerce.entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
-public class ItemDoPedidoPK {
+public class ItemDoPedidoPK implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")  
-    private Pedido pedido;
+    private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @JoinColumn(name = "produto_id") 
-    private Produto produto;
+    private Long pedidoId;
+    private Long produtoId;
 
-    
-    public ItemDoPedidoPK() {
+    public ItemDoPedidoPK() { }
+
+    public ItemDoPedidoPK(Long pedidoId, Long produtoId) {
+        this.pedidoId = pedidoId;
+        this.produtoId = produtoId;
     }
 
-
-    public ItemDoPedidoPK(Pedido pedido, Produto produto) {
-        this.pedido = pedido;
-        this.produto = produto;
+    public Long getPedidoId() {
+        return pedidoId;
     }
 
-    // Getters e setters
-    public Pedido getPedido() {
-        return pedido;
+    public void setPedidoId(Long pedidoId) {
+        this.pedidoId = pedidoId;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public Long getProdutoId() {
+        return produtoId;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public void setProdutoId(Long produtoId) {
+        this.produtoId = produtoId;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-  
-    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        ItemDoPedidoPK that = (ItemDoPedidoPK) obj;
-        return pedido.equals(that.pedido) && produto.equals(that.produto);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemDoPedidoPK that = (ItemDoPedidoPK) o;
+        return Objects.equals(pedidoId, that.pedidoId) &&
+               Objects.equals(produtoId, that.produtoId);
     }
 
     @Override
     public int hashCode() {
-        return 31 * pedido.hashCode() + produto.hashCode();
+        return Objects.hash(pedidoId, produtoId);
     }
 }

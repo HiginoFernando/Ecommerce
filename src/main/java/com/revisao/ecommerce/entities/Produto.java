@@ -1,19 +1,13 @@
+// src/main/java/com/revisao/ecommerce/entities/Produto.java
 package com.revisao.ecommerce.entities;
 
 import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "produtos")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Produto {
 
     @Id
@@ -31,59 +25,28 @@ public class Produto {
 
     private String imgUrl;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "produto_categoria",
-            joinColumns = @JoinColumn(name = "produto_id"),
-            inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+        joinColumns = @JoinColumn(name = "produto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private List<Categoria> categorias;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Double getPreco() { return preco; }
+    public void setPreco(Double preco) { this.preco = preco; }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getImgUrl() { return imgUrl; }
+    public void setImgUrl(String imgUrl) { this.imgUrl = imgUrl; }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-
-	public String getImgUrl() {
-		return imgUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
-
-	public List<Categoria> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-
-   
+    public List<Categoria> getCategorias() { return categorias; }
+    public void setCategorias(List<Categoria> categorias) { this.categorias = categorias; }
 }
